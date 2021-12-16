@@ -1,0 +1,59 @@
+body {
+    background-color: white;
+}
+.main-title {
+    margin-bottom: 25px;
+    font-family: 'Rubik', sans-serif;;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 70px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0;
+    color: #34C465;
+
+}
+
+.team-name{
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    color: #AEA6A6;
+    font-weight: 600;
+    font-size: 26px;
+    line-height: 27px;
+}
+
+#myChart {
+    align-items: center;
+    margin: 0;
+    background-color: white;
+    max-width: 1200px;
+    height: 1000px;
+}
+
+.date-today {
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0;
+    color: #000000;
+}
+
+
+.hour-price{
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 4px solid #34C365;
+}
+
+h4{
+    align-items: center;
+    text-align: center;
+    font-size: 34px;
+}
+
+h1 {
+    color: white;
+}
