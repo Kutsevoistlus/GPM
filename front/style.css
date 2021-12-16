@@ -125,7 +125,6 @@ h4 {
 }
 
 .consumption-highlight {
-    border: 1px solid black;
     height: inherit;
     position: absolute;
     z-index: -1;

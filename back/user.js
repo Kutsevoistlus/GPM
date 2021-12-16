@@ -14,7 +14,13 @@ function registerAccount(email, pass, agatarkId) {
     users[email] = {
         registered: new Date(),
         lastNotified: new Date(0),
-        prefs: {blockedTimes: [], minPower: 0, maxPower: 100},
+        prefs: {
+            silentTime: [],
+            autoPower: false,
+            autoPoweredDevices: [],
+            minPower: 50,
+            maxPower: 100
+        },
         password: bcrypt.hashSync(pass, 10),
         agatarkId: agatarkId || -1,
         tokens: []
@@ -55,7 +61,7 @@ function checkToken(string) {
                     return false;
                 }
                 console.log("String matched");
-                return true;
+                return i;
             }
         }
     }
@@ -88,14 +94,26 @@ router.post("/login", function(req, res) {
     }
 })
 
-router.post("/testToken", function(req, res) {
+router.post("/token", function(req, res) {
     return res.send(checkToken(req.body.token));
 })
 
+router.post("/settings", function(req, res) {
+    let user = checkToken(req.body.token);
+    if(!user) {
+        return res.send("Invalid session token").status(400);
+    }
+    for(let i in req.body.settings) {
+        if(users[user].prefs[i] !== undefined) users[user].prefs[i] = req.body.settings[i];
+    }
+    console.log(users[user].prefs);
+    return res.send("Successfully updated settings").status(200);
+})
+
 setInterval(function(){
-    let currentHour = new Date().getHours()
+    let currentHour = new Date().getHours();
     for(let i in users) {
-        if(users[i].lastNotified.getHours() < currentHour && users[i].prefs.blockedTimes.indexOf(currentHour) === -1) {
+        if(users[i].lastNotified.getHours() < currentHour && users[i].prefs.silentTime.indexOf(currentHour) === -1) {
             //sendEmail(i);
             console.log("Sent email");
             users[i].lastNotified = new Date();
