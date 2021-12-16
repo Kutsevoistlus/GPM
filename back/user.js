@@ -2,6 +2,8 @@ let express = require('express'),
     router = express.Router();
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 let users = {}
 let tokens = {}
@@ -13,7 +15,7 @@ function registerAccount(email, pass) {
     users[email] = {
         registered: new Date(),
         lastNotified: new Date(0),
-        prefs: {blockedTimes: {}},
+        prefs: {blockedTimes: []},
         password: bcrypt.hashSync(pass, 10)
     }
     tokens[email] = [];
@@ -21,6 +23,24 @@ function registerAccount(email, pass) {
 
 function generateToken() {
     return crypto.randomBytes(20).toString("hex");
+}
+
+function sendEmail(email, type) {
+    const emailText = 'Hei, elektri hind on tõuseb järgmise tunni jooksul 70% ja püsib kuni kella 19:00-ni.'
+    const msg = {
+        to: email,
+        from: 'goombapowermanagement@gmail.com',
+        subject: 'Elektri hindade muutus',
+        text: emailText,
+        html: '<p>'+emailText+'</p><br><br>See on automaatselt genereeritud email. Palun ärge vastake sellele.'
+    }
+    sgMail.send(msg)
+        .then(() => {
+            console.log('Email sent to '+email)
+        }).catch((error) => {
+            console.error(error)
+        })
+    return true;
 }
 
 router.post("/register", function(req, res) {
@@ -47,5 +67,16 @@ router.post("/login", function(req, res) {
         return res.send("Incorrect password").status(400);
     }
 })
+
+setInterval(function(){
+    let currentHour = new Date().getHours()
+    for(let i in users) {
+        if(users[i].lastNotified.getHours() < currentHour && users[i].prefs.blockedTimes.indexOf(currentHour) === -1) {
+            //sendEmail(i);
+            console.log("Sent email");
+            users[i].lastNotified = new Date();
+        }
+    }
+},3000)
 
 module.exports = router;
