@@ -1,3 +1,10 @@
+$('.icon').onClick(function () {
+    $('.search').toggleClass('expanded');
+});
+
+
+
+
 const xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
 const yValues = [15, 6, 14, 7, 13, 8, 12, 9, 11, 10, 10];
 
@@ -38,7 +45,7 @@ function createHighlight(time, type) {
         div.style.borderTopRightRadius = "100%";
         div.style.borderBottomRightRadius = "100%";
     }
-    type === "good" ? div.style.backgroundColor = "green" : div.style.backgroundColor = "red";
+    type === "good" ? div.style.backgroundColor = "#3EEF7A" : div.style.backgroundColor = "#E14F4F";
     container.appendChild(div);
     let text = document.createElement("span");
     text.classList.add("consumption-highlight-text");

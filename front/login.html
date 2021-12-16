@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>GPM</title>
+</head>
+<body style="background-color:#E0DFE1">
+<div id="header"></div>
+<form method="post">
+    <div class="login-from">
+        <div class="register-button-container">
+            <button class="register-button" onclick="location.href = '#';">Registreeri</button>
+        </div>
+        <h1 class="login-title">Sisestage sisselogimiseks andmed</h1>
+
+        <div class="login-button-container">
+            <button class="login-button">Email</button>
+        </div>
+        <input class="search" type="search" placeholder="Email"/>
+
+        <div class="login-button-container" style="margin-top: 20px">
+            <button class="login-button">Password</button>
+        </div>
+        <input class="search" type="search" placeholder="Email"/><br>
+
+        <div class="box-line"></div>
+
+    <a href="#" class="submit-button">Submit</a>
+    </div>
+</form>
+<!--Import Chart for graph-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<!--Import Jquery-->
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossOrigin="anonymous">
+</script>
+
+
+<script>
+    $(function () {
+        $("#header").load("header.html");
+    });
+</script>
+
+
+<script src="script.js"></script>
+</body>
+</html>
