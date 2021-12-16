@@ -6,19 +6,19 @@ const sgMail = require('@sendgrid/mail')
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 let users = {}
-let tokens = {}
 
 const emailFormat = new RegExp(/^[\w.+]+@[\w]+\.[\w]{2,}$/i);
 const passwordFormat = new RegExp(/^[\w!@#.,]+$/i)
 
-function registerAccount(email, pass) {
+function registerAccount(email, pass, agatarkId) {
     users[email] = {
         registered: new Date(),
         lastNotified: new Date(0),
-        prefs: {blockedTimes: []},
-        password: bcrypt.hashSync(pass, 10)
+        prefs: {blockedTimes: [], minPower: 0, maxPower: 100},
+        password: bcrypt.hashSync(pass, 10),
+        agatarkId: agatarkId || -1,
+        tokens: []
     }
-    tokens[email] = [];
 }
 
 function generateToken() {
@@ -43,12 +43,32 @@ function sendEmail(email, type) {
     return true;
 }
 
+function checkToken(string) {
+    let now = new Date();
+    for(let i in users) {
+        for(let j in users[i].tokens) {
+            let checking = users[i].tokens[j];
+            if(string === checking.string) {
+                if(now > (Date.parse(checking.timeCreated) + checking.expiryTime)) {
+                    console.log("Outdated string");
+                    users[i].tokens.splice(Number(j), 1);
+                    return false;
+                }
+                console.log("String matched");
+                return true;
+            }
+        }
+    }
+    console.log("String didn't match");
+    return false;
+}
+
 router.post("/register", function(req, res) {
     if(Object.keys(users).indexOf(req.body.email)!==-1) {
         return res.send("Email already registered").status(400);
     }
     if(emailFormat.test(req.body.email) && passwordFormat.test(req.body.password)) {
-        registerAccount(req.body.email, req.body.password)
+        registerAccount(req.body.email, req.body.password, req.body.agatarkId);
         return res.send("Registered successfully").status(200);
     } else {
         return res.send("Invalid email or password").status(400);
@@ -60,12 +80,16 @@ router.post("/login", function(req, res) {
         return res.send("No such user").status(400);
     }
     if(bcrypt.compareSync(req.body.password, users[req.body.email].password)) {
-        tokens[req.body.email].push({string: generateToken(), timeCreated: new Date(), expiryTime: 3600 * 1000});
-        console.log(tokens);
-        return res.send("Logged in successfully").status(200);
+        let token = generateToken();
+        users[req.body.email].tokens.push({string: token, timeCreated: new Date(), expiryTime: 600 * 1000});
+        return res.json({token: token}).status(200);
     } else {
         return res.send("Incorrect password").status(400);
     }
+})
+
+router.post("/testToken", function(req, res) {
+    return res.send(checkToken(req.body.token));
 })
 
 setInterval(function(){

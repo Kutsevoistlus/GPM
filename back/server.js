@@ -6,6 +6,7 @@ app.use(cors());
 
 require('dotenv').config();
 
+app.use('/', express.static("./front"));
 app.use('/prices', require('./prices.js'));
 app.use('/user', require('./user.js'));
 
