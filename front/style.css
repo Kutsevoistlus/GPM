@@ -272,6 +272,29 @@ h4 {
 }
 
 
-.no-key-text{
+.settings-container{
+    align-items: center;
+    text-align: center;
+    margin: 170px 200px 0 275px;
+    background: #FFFFFF;
+    border: 1px solid black;
+    box-sizing: border-box;
+    position: absolute;
+    width: 1000px;
+    height: 800px;
 
+}
+
+.set-time-time{
+    margin:10px 0 10px 0;
+    text-decoration: none;
+    font-style: normal;
+    font-weight: bold;
+    border: none;
+    color: #FFFFFF;
+    background: #AEA6A6;
+    font-size: 20px;
+    line-height: 23px;
+    align-items: center;
+    text-align: center;
 }
