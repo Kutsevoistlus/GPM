@@ -14,21 +14,20 @@ function addDay(givenDay) {
     return newDay;
 }
 
-async function getPrices() {
-    let prices = [];
+ function getPrices() {
+    let array = [];
     let currentDate = getToday();
     let nextDate = addDay(currentDate);
-    await axios.get("https://dashboard.elering.ee/api/nps/price?start="+currentDate.toISOString()+"&end="+nextDate.toISOString())
+    axios.get("https://dashboard.elering.ee/api/nps/price?start="+currentDate.toISOString()+"&end="+nextDate.toISOString())
         .then(function(res) {
             let resData = (res.data.data['ee']); // Select estonia price data
-            resData.forEach(function(e) {prices.push(e['price'])});
+            resData.forEach(function(e) {array.push(e['price'])});
         })
         .catch(err => function(){console.log(err); return []})
-    console.log("Retrieved prices");
-    return prices;
+    return array;
 }
 
-let prices = [];
+let prices = getPrices();
 let pricesDate = getToday();
 
 setInterval(function(){
