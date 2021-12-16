@@ -32,7 +32,7 @@ function sendEmail(email, type) {
         from: 'goombapowermanagement@gmail.com',
         subject: 'Elektri hindade muutus',
         text: emailText,
-        html: '<p>'+emailText+'</p>',
+        html: '<p>'+emailText+'</p><br><br>See on automaatselt genereeritud email. Palun ärge vastake sellele.'
     }
     sgMail.send(msg)
         .then(() => {
