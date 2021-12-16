@@ -41,4 +41,30 @@ router.get('/', function(req, res){
     return res.send(prices).status(200);
 })
 
+const highlightSensitivity = 1.5;
+router.get('/highlights', function(req, res) {
+    let avg = (prices.reduce((a, b) => a + b, 0) /prices.length);
+
+    let low = [];
+    let high = [];
+
+    for(let i in prices) {
+        if(prices[i] >= avg*highlightSensitivity) {
+            high.push(Number(i));
+        }
+        if(prices[i] < avg/highlightSensitivity) {
+            low.push(Number(i));
+        }
+    }
+
+    return res.send({
+        current: prices[new Date().getHours()],
+        min: Math.min(...prices),
+        max: Math.max(...prices),
+        avg: avg.toPrecision(3),
+        low: low,
+        high: high
+    })
+})
+
 module.exports = router;

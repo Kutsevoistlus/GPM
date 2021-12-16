@@ -111,14 +111,30 @@ h4 {
     justify-content: center;
 }
 
-.consumption-time{
+.consumption-time {
     display: flex;
     flex-direction: row;
 }
 
-.consumption-container{
-margin: 100px 200px 100px 200px;
+.consumption-container {
+    margin: 100px 200px 100px 200px;
     height: 80px ;
     border: 3px solid #34C465;
     border-radius: 60px;
+    overflow: hidden;
+}
+
+.consumption-highlight {
+    border: 1px solid black;
+    height: inherit;
+    position: absolute;
+    z-index: -1;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.consumption-highlight-text {
+    position: absolute;
+    top: -25px;
+    z-index: 5;
 }

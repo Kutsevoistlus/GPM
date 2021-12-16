@@ -22,12 +22,34 @@ let graph = new Chart("myChart", {
 });
 
 let prices = [];
-let currentPrice = 0;
-let minPrice = 0;
-let maxPrice = 0;
-let avgPrice = 0;
-fetch("http://localhost:3000/prices").then(res => res.json()).then(function(e){prices = e; currentPrice = prices[new Date().getHours()]});
-setTimeout(function(){
+let highlights = {};
+
+function createHighlight(time, type) {
+    let container = document.querySelector(".consumption-container");
+    let div = document.createElement("div");
+    div.classList.add("consumption-highlight");
+    div.style.width = container.clientWidth/24+"px";
+    div.style.marginLeft = container.clientWidth/24*time+"px";
+    if(time === 0) {
+        div.style.borderTopLeftRadius = "100%";
+        div.style.borderBottomLeftRadius = "100%";
+    }
+    if(time === 23) {
+        div.style.borderTopRightRadius = "100%";
+        div.style.borderBottomRightRadius = "100%";
+    }
+    type === "good" ? div.style.backgroundColor = "green" : div.style.backgroundColor = "red";
+    container.appendChild(div);
+    let text = document.createElement("span");
+    text.classList.add("consumption-highlight-text");
+    text.textContent = time+":00";
+    div.appendChild(text);
+    text.style.right = text.offsetWidth/2+"px";
+}
+
+fetch("http://localhost:3000/prices").then(res => res.json()).then(function(e){prices = e});
+fetch("http://localhost:3000/prices/highlights").then(res => res.json()).then(function(e){highlights = e; showData()});
+function showData(){
     let array = [];
     for(let i = 0; i<24; i++) {
         array.push(i+":00");
@@ -35,12 +57,14 @@ setTimeout(function(){
     graph.data.labels = array;
     graph.data.datasets[0].data = prices;
     graph.update();
-    document.querySelector("#hour-price").textContent = currentPrice+"€/kWh"
-    minPrice = Math.min(...prices)
-    document.querySelector("#min-price").textContent = minPrice+"€/kWh"
-    maxPrice = Math.max(...prices)
-    document.querySelector("#max-price").textContent = maxPrice+"€/kWh"
-    avgPrice = (prices.reduce((a, b) => a + b, 0) /prices.length).toPrecision(3)
-    document.querySelector("#avg-price").textContent = avgPrice+"€/kWh"
-
-    },150)
+    document.querySelector("#hour-price").textContent = highlights.current+"€/kWh"
+    document.querySelector("#min-price").textContent = highlights.min+"€/kWh"
+    document.querySelector("#max-price").textContent = highlights.max+"€/kWh"
+    document.querySelector("#avg-price").textContent = highlights.avg+"€/kWh"
+    for(let i in highlights.low) {
+        createHighlight(highlights.low[i], "good");
+    }
+    for(let i in highlights.high) {
+        createHighlight(highlights.high[i], "bad");
+    }
+}
