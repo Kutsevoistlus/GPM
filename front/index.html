@@ -5,11 +5,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <title>GPM</title>
 </head>
 <body>
-<div id="header" ></div>
+<div id="header"></div>
 <h1 class="main-title">Live Elektrituru statistika</h1>
 <p class="team-name">by Goomba NFT Collectors</p>
 
@@ -18,17 +19,53 @@
     <script> document.write(new Date().toLocaleDateString()); </script>
 </div>
  -->
+<div class="container">
 
-<div class="day-prices">
-    <div class="hour-price">
-        <h4 id="hour-price">€/kWh</h4>
+    <div class="day-prices">
+        <div class="hour-price">
+            <h4 id="hour-price">€/kWh</h4>
+            <h4 class="price-text">Tunni Hind</h4>
+        </div>
     </div>
+
+    <div class="day-prices">
+        <div class="hour-price">
+            <h4 id="min-price">€/kWh</h4>
+            <h4 class="price-text">Päeva min</h4>
+        </div>
+    </div>
+
+
+    <div class="day-prices">
+        <div class="hour-price">
+            <h4 id="max-price">€/kWh</h4>
+            <h4 class="price-text">Päeva max</h4>
+        </div>
+    </div>
+
+
+    <div class="day-prices">
+        <div class="hour-price">
+            <h4 id="avg-price">€/kWh</h4>
+            <h4 class="price-text">Päeva keskmine</h4>
+        </div>
+    </div>
+
+
 </div>
+
+<div>
+    <div class="consumption-time">
+        <h2>08-13</h2>
+        <h2>20-03</h2>
+    </div>
+    <div class="consumption-container"></div>
+</div>
+
 
 <div class="graph">
     <canvas id="myChart" style="height:350px;max-height:1000px;width:100%;max-width:2000px"></canvas>
 </div>
-
 
 
 <!--Import Chart for graph-->

@@ -23,6 +23,9 @@ let graph = new Chart("myChart", {
 
 let prices = [];
 let currentPrice = 0;
+let minPrice = 0;
+let maxPrice = 0;
+let avgPrice = 0;
 fetch("http://localhost:3000/prices").then(res => res.json()).then(function(e){prices = e; currentPrice = prices[new Date().getHours()]});
 setTimeout(function(){
     let array = [];
@@ -32,5 +35,12 @@ setTimeout(function(){
     graph.data.labels = array;
     graph.data.datasets[0].data = prices;
     graph.update();
-    document.querySelector("#hour-price").textContent = currentPrice+"€/MWh"
+    document.querySelector("#hour-price").textContent = currentPrice+"€/kWh"
+    minPrice = Math.min(...prices)
+    document.querySelector("#min-price").textContent = minPrice+"€/kWh"
+    maxPrice = Math.max(...prices)
+    document.querySelector("#max-price").textContent = maxPrice+"€/kWh"
+    avgPrice = (prices.reduce((a, b) => a + b, 0) /prices.length).toPrecision(3)
+    document.querySelector("#avg-price").textContent = avgPrice+"€/kWh"
+
     },150)
