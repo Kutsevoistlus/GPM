@@ -1,3 +1,5 @@
+let express = require('express'),
+    router = express.Router();
 const axios = require("axios");
 
 function getToday() {
@@ -15,7 +17,7 @@ function addDay(givenDay, amount) {
 function getPrices() {
     let array = [];
     let currentDate = getToday();
-    let nextDate = addDay(currentDate, 1);
+    let nextDate = new Date(addDay(currentDate, 1)-1); //-1 to get 23:59:59 rather than 00:00:00 (resulting in 25 points)
     axios.get("https://dashboard.elering.ee/api/nps/price?start="+currentDate.toISOString()+"&end="+nextDate.toISOString())
         .then(function(res) {
             let resData = (res.data.data['ee']); // Select estonia price data
@@ -34,3 +36,10 @@ setInterval(function(){
         prices = getPrices();
     }
 },3000)
+
+router.get('/', function(req, res){
+    console.log(prices.length);
+    return res.send(prices).status(200);
+})
+
+module.exports = router;

@@ -4,7 +4,7 @@ app.use(express.json());
 
 require('dotenv').config();
 
-require('./prices.js');
+app.use('/prices', require('./prices.js'));
 app.use('/user', require('./user.js'));
 
 app.listen(process.env.PORT, () => {
