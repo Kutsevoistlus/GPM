@@ -38,7 +38,6 @@ setInterval(function(){
 },3000)
 
 router.get('/', function(req, res){
-    console.log(prices.length);
     return res.send(prices).status(200);
 })
 
