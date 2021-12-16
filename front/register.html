@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="style.css">
@@ -12,11 +12,11 @@
 <body style="background-color:#E0DFE1">
 <div id="header"></div>
 <form method="post">
-    <div class="login-from">
+    <div class="register-form">
         <div class="register-button-container">
-            <button class="register-button" onclick="location.href = '#';">Registreeri</button>
+            <button class="register-button" onclick="location.href = 'login.html';">On juba konto</button>
         </div>
-        <h1 class="login-title">Sisestage sisselogimiseks andmed</h1>
+        <h1 class="login-title">Sisestage registreerimiseks andmed</h1>
 
         <div class="login-button-container">
             <button class="login-button">Email</button>
@@ -28,13 +28,24 @@
         </div>
         <input class="search" type="password" placeholder="Password"/><br>
 
+        <div class="login-button-container" style="margin-top: 20px">
+            <button class="login-button">agaTark võti</button>
+        </div>
+        <input class="search" type="text" placeholder="API key"/><br>
+
+
+        <p class="no-key-text">Pole Võtit:</p>
+        <div class="login-button-container" style="margin-top: 20px">
+            <button class="login-button">Vajuta siia</button>
+        </div>
+
+
         <div class="box-line"></div>
 
-    <a href="#" class="submit-button">Submit</a>
+        <a href="#" class="submit-button">Submit</a>
     </div>
 </form>
-<!--Import Chart for graph-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
 
 <!--Import Jquery-->
 <script

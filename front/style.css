@@ -151,6 +151,31 @@ h4 {
     height: 600px;
 }
 
+.login-form {
+    align-items: center;
+    text-align: center;
+    margin: 170px 500px 0 450px;
+    background: #FFFFFF;
+    border: 1px solid black;
+    box-sizing: border-box;
+    position: absolute;
+    width: 600px;
+    height: 600px;
+}
+
+.register-form {
+    align-items: center;
+    text-align: center;
+    margin: 170px 500px 0 450px;
+    background: #FFFFFF;
+    border: 1px solid black;
+    box-sizing: border-box;
+    position: absolute;
+    width: 600px;
+    height: 815px;
+}
+
+
 .register-button-container {
     margin: 15px 15px 0 0;
     float: right;
@@ -227,7 +252,7 @@ h4 {
 
 .box-line{
     margin-top:50px;
-    border-bottomw: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .submit-button{
@@ -244,4 +269,9 @@ h4 {
     display: inline-block;
     margin: 50px 2px 200px 0;
     cursor: pointer;
+}
+
+
+.no-key-text{
+
 }
