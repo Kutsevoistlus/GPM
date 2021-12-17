@@ -22,21 +22,20 @@ header {
     float: left;
 }
 
-.burger-menu{
+.burger-menu {
     background: transparent;
     display: flex;
     justify-content: right;
     text-decoration: none;
 }
 
-.burger-menu a{
+.burger-menu a {
     text-decoration: none;
     color: white;
-    font-size:20px ;
-    margin: 30px 30px 30px 0   ;
+    font-size: 20px;
+    margin: 30px 30px 30px 0;
 
 }
-
 
 
 .main-title {
@@ -232,7 +231,7 @@ h4 {
 }
 
 .login-button {
-    margin:10px 0 10px 0;
+    margin: 10px 0 10px 0;
     text-decoration: none;
     font-style: normal;
     font-weight: bold;
@@ -255,23 +254,23 @@ h4 {
     padding: 5px;
     width: 200px;
     transition: all .5s ease;
-    position:relative;
-    opacity:1;
+    position: relative;
+    opacity: 1;
 }
 
-.box-line{
-    margin-top:50px;
+.box-line {
+    margin-top: 50px;
     border-bottom: 1px solid black;
 }
 
-.submit-button{
+.submit-button {
     background-color: #34C365;
     font-style: normal;
     font-weight: bold;
     font-size: 20px;
     line-height: 23px;
     color: white;
-    border:1px solid black;
+    border: 1px solid black;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -281,10 +280,10 @@ h4 {
 }
 
 
-.settings-container{
+.settings-container {
     align-items: center;
     text-align: center;
-    margin: 170px 200px 0 275px;
+    margin: 170px 200px 0 530px;
     background: #FFFFFF;
     border: 1px solid black;
     box-sizing: border-box;
@@ -294,8 +293,8 @@ h4 {
 
 }
 
-.set-time-time{
-    margin:10px 0 10px 0;
+.set-time-time {
+    margin: 10px 0 10px 0;
     text-decoration: none;
     font-style: normal;
     font-weight: bold;
@@ -308,6 +307,20 @@ h4 {
     text-align: center;
 }
 
-.container-2{
-    margin-bottom: 350px;
+.settings-title {
+    margin-top: 60px;
+    align-items: center;
+    text-align: center;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 36px;
+
+}
+
+.settings-container-text {
+    font-weight: normal;
+    margin-top: 40px;
+    margin-bottom: 0;
+    font-size: 24px;
+    line-height: 27px;
 }

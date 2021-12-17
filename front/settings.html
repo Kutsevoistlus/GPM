@@ -9,38 +9,27 @@
     <meta charset="UTF-8">
     <title>GPM</title>
 </head>
-<body style="background-color:#E0DFE1;height:1600px">
+<body style="background-color:#E0DFE1;height:1000px">
 <div id="header"></div>
 
 <div class="settings-container">
-    <h1 class="login-title">Üldsätted</h1>
-    <!--
+    <h1 class="settings-title">agaTark sätted</h1>
     <div class="set-time-container">
-        <h2>Määra ajad sõnumite saamiseks</h2>
-        <button class="set-time-time">00-00</button>
-    </div>
 
-    <div class="set-time-container">
-        <h2>Määra kuhu tahad teavitusi saada</h2>
-        <button class="set-time-time">type sth..</button>
-    </div>
-    -->
-    <h1 class="login-title">agaTark sätted</h1>
-    <div class="set-time-container">
-        <h2>Kas automaatselt sätestada masinaid</h2>
+        <h3 class="settings-container-text">Kas automaatselt sätestada masinaid</h3>
         <input class="search" id="auto-power-toggle" disabled value="false"/><br>
         <button class="set-time-time" onclick='document.querySelector("#auto-power-toggle").value=true'>Jah</button>
         <button class="set-time-time" onclick='document.querySelector("#auto-power-toggle").value=false'>Ei</button>
     </div>
 
     <div class="set-time-container">
-        <h2>Masinad, mida automatseelt sätestada</h2>
+        <h3 class="settings-container-text">Masinad mida automaatselt seadistada</h3>
         <input class="set-time-time" id="auto-power-machines"></input>
     </div>
 
 
     <div class="set-time-container">
-        <h2>TEST: Sea kõik seadmete setpointid manuaalselt</h2>
+        <h3 class="settings-container-text">TEST: Sea kõik seadmete setpoint'id</h3>
         <button class="set-time-time" onclick="testSetDevices(0)">min</button>
         <button class="set-time-time" onclick="testSetDevices(1)">max</button>
     </div>
