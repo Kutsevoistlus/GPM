@@ -42,6 +42,9 @@ function registerAccount(email, pass, agatarkId) {
 }
 
 function sendEmail(email) {
+    if(!process.env.SENDGRID_API_KEY) {
+        return false;
+    }
     const emailText = 'Tere, täname et registreerisite meie teenusega.'
     const msg = {
         to: email,

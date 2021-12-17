@@ -12,7 +12,7 @@
             <div class="burger-menu">
                 <a href="login.html">LogIn</a>
                 <a href="register.html">Register</a>
-                <a href="settings.html">Settings</a>
+                <a href="settings.html" id="nav-settings-link">Settings</a>
             </div>
 
             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -22,6 +22,15 @@
     </div>
 
 </header>
-
+<script>
+    let userToken = localStorage.getItem("token");
+    fetch("http://localhost:3000/user/token", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            token: userToken
+        })
+    }).then(res => res.json()).then(function(res){if(!res){document.querySelector("#nav-settings-link").style.display = "none"}});
+</script>
 </body>
 </html>
