@@ -20,7 +20,7 @@ function getPrices() {
     let nextDate = new Date(addDay(currentDate, 1)-1); //-1 to get 23:59:59 rather than 00:00:00 (resulting in 25 points)
     axios.get("https://dashboard.elering.ee/api/nps/price?start="+currentDate.toISOString()+"&end="+nextDate.toISOString())
         .then(function(res) {
-            let resData = (res.data.data['ee']); // Select estonia price data
+            let resData = res.data.data['ee']; // Select estonia price data
             resData.forEach(function(e) {array.push(Number(e['price'].toPrecision(3)))});
         })
         .catch(err => function(){console.log(err); return []})
@@ -68,3 +68,5 @@ router.get('/highlights', function(req, res) {
 })
 
 module.exports = router;
+module.exports.getPrices = getPrices;
+module.exports.getToday = getToday;

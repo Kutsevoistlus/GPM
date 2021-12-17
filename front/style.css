@@ -125,7 +125,7 @@ h4 {
 }
 
 .consumption-highlight {
-    height: 80px;
+    height: inherit;
     position: absolute;
     z-index: -1;
     text-align: center;
@@ -133,7 +133,6 @@ h4 {
 }
 
 .consumption-highlight-text {
-
     position: absolute;
     top: -25px;
     z-index: 5;
