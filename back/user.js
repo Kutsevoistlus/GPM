@@ -130,6 +130,16 @@ router.post("/get-settings", function(req, res) {
 let loginToken = crypto.pbkdf2Sync("apiUserApiUser", "apiuser", 10000, 32, "sha256").toString("hex");
 let config = {headers: {"Accept-Confirm": "ok", "Content-Type": "application/json"}}
 
+router.post("/presentation-test", function(req, res) {
+    for(let i in users['sander.paasalu@khk.ee'].devices) {
+        let device = users['sander.paasalu@khk.ee'].devices[i];
+        let setPoint = device.min + (device.max - device.min) * req.body.amount;
+        alterDevice(device.id, {"setpoint": setPoint.toPrecision(4)})
+    }
+    console.log("Set all device setpoints to "+req.body.amount);
+    res.send("Success").status(200);
+})
+
 axios.put("https://c607.by.enlife.io/hello", {user: "apiuser", token: loginToken})
     .then(function(res) {
         config.headers.Authorization = res.data.authorization;
@@ -176,8 +186,7 @@ setInterval(function(){
         if(users[i].agatarkId!==-1 && users[i].devices.length===0) {
             getDevices().then(function(res){users[i].devices = getDeviceData(res[0])});
         }
-
-        if(users[i].prefs.autoPower && users[i].lastPowered+1800*1e3 < Date.now() && users[i].prefs.autoPoweredDevices.length>0) {
+        if(users[i].prefs.autoPower && users[i].lastPowered+5*1e3 < Date.now() && users[i].prefs.autoPoweredDevices.length>0) {
             users[i].devices.forEach(function(device){
                 if(users[i].prefs.autoPoweredDevices.indexOf(device.id)!==-1) {
                     let setPoint = device.min + (device.max - device.min) * priceLevel;

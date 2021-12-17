@@ -14,35 +14,74 @@
 
 <div class="settings-container">
     <h1 class="login-title">Üldsätted</h1>
-
+    <!--
     <div class="set-time-container">
         <h2>Määra ajad sõnumite saamiseks</h2>
         <button class="set-time-time">00-00</button>
     </div>
 
     <div class="set-time-container">
-        <h2>Määra kuhu tahad teavitui saada</h2>
+        <h2>Määra kuhu tahad teavitusi saada</h2>
         <button class="set-time-time">type sth..</button>
     </div>
+    -->
     <h1 class="login-title">agaTark sätted</h1>
     <div class="set-time-container">
-        <h2>Masinad, mida ignoreerida</h2>
-        <button class="set-time-time">type sth...</button>
+        <h2>Kas automaatselt sätestada masinaid</h2>
+        <input class="search" id="auto-power-toggle" disabled value="false"/><br>
+        <button class="set-time-time" onclick='document.querySelector("#auto-power-toggle").value=true'>Jah</button>
+        <button class="set-time-time" onclick='document.querySelector("#auto-power-toggle").value=false'>Ei</button>
+    </div>
+
+    <div class="set-time-container">
+        <h2>Masinad, mida automatseelt sätestada</h2>
+        <input class="set-time-time" id="auto-power-machines"></input>
     </div>
 
 
     <div class="set-time-container">
-        <h2>Millised väärtused lubate masinal seadistada</h2>
-        <button class="set-time-time">mix</button>
-        <button class="set-time-time">max</button>
+        <h2>TEST: Sea kõik seadmete setpointid manuaalselt</h2>
+        <button class="set-time-time" onclick="testSetDevices(0)">min</button>
+        <button class="set-time-time" onclick="testSetDevices(1)">max</button>
     </div>
+
+    <button class="submit-button" onclick='fetch("http://localhost:3000/user/settings", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            token: userToken,
+            settings: {
+                autoPower: document.querySelector("#auto-power-toggle").value === "true",
+                autoPoweredDevices: document.querySelector("#auto-power-machines").value.split(",").map(function(e){return Number(e)})
+            }
+        })
+    }).then(res => console.log(res))'>Salvesta</button>
 
 </div>
 
-
-
-
-
+<script>
+    let userToken = localStorage.getItem("token");
+    fetch("http://localhost:3000/user/get-settings", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            token: userToken
+        })
+    }).then(res => res.json()).then(res => showSettings(res))
+    function showSettings(data) {
+        document.querySelector("#auto-power-toggle").value = data.autoPower;
+        document.querySelector("#auto-power-machines").value = data.autoPoweredDevices.toString();
+    }
+    function testSetDevices(amount) {
+        fetch("http://localhost:3000/user/presentation-test", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                amount: amount
+            })
+        })
+    }
+</script>
 
 <!--Import Chart for graph-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
