@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>GPM</title>
+</head>
+<body style="background-color:#E0DFE1;height:1600px">
+<div id="header"></div>
+
+<div class="settings-container">
+    <h1 class="login-title">Üldsätted</h1>
+
+    <div class="set-time-container">
+        <h2>Määra ajad sõnumite saamiseks</h2>
+        <button class="set-time-time">00-00</button>
+    </div>
+
+    <div class="set-time-container">
+        <h2>Määra kuhu tahad teavitui saada</h2>
+        <button class="set-time-time">type sth..</button>
+    </div>
+    <h1 class="login-title">agaTark sätted</h1>
+    <div class="set-time-container">
+        <h2>Masinad, mida ignoreerida</h2>
+        <button class="set-time-time">type sth...</button>
+    </div>
+
+
+    <div class="set-time-container">
+        <h2>Millised väärtused lubate masinal seadistada</h2>
+        <button class="set-time-time">mix</button>
+        <button class="set-time-time">max</button>
+    </div>
+
+</div>
+
+
+
+
+
+
+<!--Import Chart for graph-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+<!--Import Jquery-->
+<script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossOrigin="anonymous">
+</script>
+
+
+<script>
+    $(function () {
+        $("#header").load("header.html");
+    });
+</script>
+
+<script src="./script.js"></script>
+</body>
+</html>
