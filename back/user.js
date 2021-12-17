@@ -38,6 +38,7 @@ function registerAccount(email, pass, agatarkId) {
             maxPower: 100
         }
     }
+    console.log("Registered account");
 }
 
 /*

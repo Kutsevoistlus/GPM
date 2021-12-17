@@ -11,28 +11,33 @@
 </head>
 <body style="background-color:#E0DFE1">
 <div id="header"></div>
-<form method="post">
     <div class="login-from">
         <div class="register-button-container">
-            <button class="register-button" onclick="location.href = '#';">Registreeri</button>
+            <a href="register.html" class="register-button" >Registreeri</a>
         </div>
         <h1 class="login-title">Sisestage sisselogimiseks andmed</h1>
 
         <div class="login-button-container">
             <button class="login-button">Email</button>
         </div>
-        <input class="search" type="email" placeholder="Email"/>
+        <input class="search" type="email" placeholder="Email" id="email-input"/>
 
         <div class="login-button-container" style="margin-top: 20px">
             <button class="login-button">Password</button>
         </div>
-        <input class="search" type="password" placeholder="Password"/><br>
+        <input class="search" type="password" placeholder="Password" id="password-input"/><br>
 
         <div class="box-line"></div>
 
-    <a href="#" class="submit-button">Submit</a>
+    <a href="#" class="submit-button" onclick='fetch("http://localhost:3000/user/login", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            email: document.querySelector("#email-input").value,
+            password: document.querySelector("#password-input").value,
+        })
+    }).then(res => res.json()).then(function(result){localStorage.setItem("token", result.token); setTimeout(function(){window.location="settings.html"},1000)})'>Submit</a>
     </div>
-</form>
 <!--Import Chart for graph-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 

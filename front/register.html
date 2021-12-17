@@ -11,7 +11,6 @@
 </head>
 <body style="background-color:#E0DFE1">
 <div id="header"></div>
-<form method="post">
     <div class="register-form">
         <div class="register-button-container">
             <button class="register-button" onclick="location.href = 'login.html';">On juba konto</button>
@@ -21,30 +20,37 @@
         <div class="login-button-container">
             <button class="login-button">Email</button>
         </div>
-        <input class="search" type="email" placeholder="Email"/>
+        <input class="search" type="email" placeholder="Email" id="email-input"/>
 
         <div class="login-button-container" style="margin-top: 20px">
             <button class="login-button">Password</button>
         </div>
-        <input class="search" type="password" placeholder="Password"/><br>
+        <input class="search" type="password" placeholder="Password" id="password-input"/><br>
 
         <div class="login-button-container" style="margin-top: 20px">
             <button class="login-button">agaTark võti</button>
         </div>
-        <input class="search" type="text" placeholder="API key"/><br>
+        <input class="search" type="text" placeholder="API key" id="agatark-võti"/><br>
 
 
         <p class="no-key-text">Pole Võtit:</p>
         <div class="login-button-container" style="margin-top: 20px">
-            <button class="login-button">Vajuta siia</button>
+            <button class="login-button" onclick="document.querySelector('#agatark-võti').value = -1">Vajuta siia</button>
         </div>
 
 
         <div class="box-line"></div>
 
-        <a href="#" class="submit-button">Submit</a>
+        <a class="submit-button" onclick='fetch("http://localhost:3000/user/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({
+            email: document.querySelector("#email-input").value,
+            password: document.querySelector("#password-input").value,
+            agatarkId: document.querySelector("#agatark-võti").value
+        })
+    }).then(function(){window.location="login.html"})'>Submit</a>
     </div>
-</form>
 
 
 <!--Import Jquery-->

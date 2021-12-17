@@ -1,10 +1,3 @@
-$('.icon').onClick(function () {
-    $('.search').toggleClass('expanded');
-});
-
-
-
-
 const xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
 const yValues = [15, 6, 14, 7, 13, 8, 12, 9, 11, 10, 10];
 
@@ -15,8 +8,8 @@ let graph = new Chart("myChart", {
         datasets: [{
             fill: false,
             lineTension: 0,
-            backgroundColor: "blue",
-            borderColor: "black",
+            backgroundColor: "black",
+            borderColor: "grey",
             data: yValues
         }]
     },
