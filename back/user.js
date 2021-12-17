@@ -40,13 +40,12 @@ function registerAccount(email, pass, agatarkId) {
     }
 }
 
-/*
-function sendEmail(email, type) {
-    const emailText = 'Hei, elektri hind on tõuseb järgmise tunni jooksul 70% ja püsib kuni kella 19:00-ni.'
+function sendEmail(email) {
+    const emailText = 'Tere, täname et registreerisite meie teenusega.'
     const msg = {
         to: email,
         from: 'goombapowermanagement@gmail.com',
-        subject: 'Elektri hindade muutus',
+        subject: 'Olete registreeritud Goomba Power Management leheküljele',
         text: emailText,
         html: '<p>'+emailText+'</p><br><br>See on automaatselt genereeritud email. Palun ärge vastake sellele.'
     }
@@ -58,7 +57,6 @@ function sendEmail(email, type) {
         })
     return true;
 }
- */
 
 function checkToken(string) {
     let now = Date.now();
@@ -118,6 +116,14 @@ router.post("/settings", function(req, res) {
         if(users[user].prefs[i] !== undefined) users[user].prefs[i] = req.body.settings[i];
     }
     return res.send("Successfully updated settings").status(200);
+})
+
+router.post("/get-settings", function(req, res) {
+    let user = checkToken(req.body.token);
+    if(!user) {
+        return res.send("Invalid session token").status(400);
+    }
+    return res.send(users[user].prefs).status(200);
 })
 
 let loginToken = crypto.pbkdf2Sync("apiUserApiUser", "apiuser", 10000, 32, "sha256").toString("hex");
@@ -180,15 +186,12 @@ setInterval(function(){
             users[i].lastPowered = Date.now();
         }
     }
-    /*
     for(let i in users) {
         if(users[i].lastNotified < Date.now() && users[i].prefs.silentTime.indexOf(new Date().getHours()) === -1) {
             sendEmail(i);
-            console.log("Sent email");
-            users[i].lastNotified = Date.now();
+            users[i].lastNotified = Date.now()*10; // Never notify again
         }
     }
-     */
 },3000)
 
 module.exports = router;

@@ -24,7 +24,6 @@ function getPrices() {
             resData.forEach(function(e) {array.push(Number(e['price'].toPrecision(3)))});
         })
         .catch(err => function(){console.log(err); return []})
-    console.log("Retrieved price data");
     return array;
 }
 
